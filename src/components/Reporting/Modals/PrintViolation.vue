@@ -9,7 +9,8 @@
 
         <modal-violation-content
 			:doPrint="doPrint"
-           :violationToPrint="violationToPrint" />
+           :violationToPrint="violationToPrint"
+		   :printPreview="printPreview" />
 
 
   </q-card>
@@ -19,6 +20,7 @@
 	import { mapState } from 'vuex';
 
 	export default {
+		props: ["violationToPrint","printPreview"],
 		data() {
 			return {
 				doPrint: false
@@ -41,7 +43,7 @@
 		mounted() {
 		},
 		computed: {
-			...mapState('reporting', ['violationToPrint'])
+			// ...mapState('reporting', ['violationToPrint'])
 		}
 	}
 </script>

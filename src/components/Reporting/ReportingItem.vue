@@ -1,6 +1,8 @@
 <template>
   <div class="q-mt-lg">
-    <button @click="printViolation('all')">print all</button>
+    <!-- <button @click="printViolation('all')">print all</button> -->
+    <button type="button" @click="printPreview=true" >Print All</button>
+
     <q-list
       bordered
       v-for="lpr in reportingData"
@@ -64,14 +66,20 @@
     <q-dialog v-model="printViolationDialog">
       <print-violation @close="printViolationDialog = false" />
     </q-dialog>
+    <WindowPortal v-model="printPreview">
+      <PrintViolation :violationToPrint="reportingData" :printPreview="printPreview" />
+    </WindowPortal>
   </div>
 </template>
 
 <script>
+import PrintViolation from "./Modals/PrintViolation";
+import WindowPortal from "./WindowPortal";
 import { mapActions } from "vuex";
 export default {
   data() {
     return {
+      printPreview: false,
       //selected: [],
       //showPrintViolationDialog: false,
       reportingData: [
@@ -105,7 +113,9 @@ export default {
 
   components: {
     "print-violation": require("components/Reporting/Modals/PrintViolation")
-      .default
+      .default,
+      PrintViolation,
+    WindowPortal
   },
 
   methods: {
