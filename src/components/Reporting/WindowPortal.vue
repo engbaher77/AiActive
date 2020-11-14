@@ -56,15 +56,26 @@ export default {
   },
   methods: {
     openPortal() {
-      this.windowRef = window.open(
-        "",
-        "",
-        "width=850,height=1000,left=200,top=200"
-      );
+      // this.windowRef = window.open("","","width=850,height=1000,left=200,top=200");
+      this.windowRef = window.open();
       this.windowRef.document.body.appendChild(this.$el);
       copyStyles(window.document, this.windowRef.document);
       this.windowRef.addEventListener("beforeunload", this.closePortal);
       this.windowRef.print();
+
+      if (this.windowRef.matchMedia) {
+        var mediaQueryList = this.windowRef.matchMedia("print");
+
+        mediaQueryList.addListener(function(mql) {
+          //alert($(mediaQueryList).html());
+          if (mql.matches) {
+            this.beforePrint();
+          } else {
+            this.afterPrint();
+          }
+        });
+      }
+      this.windowRef.onafterprint = this.closePortal;
     },
     closePortal() {
       if (this.windowRef) {
@@ -72,17 +83,17 @@ export default {
         this.windowRef = null;
         this.$emit("close");
       }
+      }
+    },
+    mounted() {
+      if (this.open) {
+        this.openPortal();
+      }
+    },
+    beforeDestroy() {
+      if (this.windowRef) {
+        this.closePortal();
+      }
     }
-  },
-  mounted() {
-    if (this.open) {
-      this.openPortal();
-    }
-  },
-  beforeDestroy() {
-    if (this.windowRef) {
-      this.closePortal();
-    }
-  }
 };
 </script>

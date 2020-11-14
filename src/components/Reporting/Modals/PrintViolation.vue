@@ -1,11 +1,11 @@
 <template>
 	<q-card class="print-violation">
     
-        <modal-header
+        <!-- <modal-header
           class="print-hide"
 		  @print="print">
 		  Violation Preview
-		</modal-header>
+		</modal-header> -->
 
         <modal-violation-content
 			:doPrint="doPrint"
