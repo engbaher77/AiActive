@@ -61,20 +61,11 @@ export default {
       this.windowRef.document.body.appendChild(this.$el);
       copyStyles(window.document, this.windowRef.document);
       this.windowRef.addEventListener("beforeunload", this.closePortal);
+      setTimeout(this.printt, 1);
+      
+    },
+    printt(){
       this.windowRef.print();
-
-      if (this.windowRef.matchMedia) {
-        var mediaQueryList = this.windowRef.matchMedia("print");
-
-        mediaQueryList.addListener(function(mql) {
-          //alert($(mediaQueryList).html());
-          if (mql.matches) {
-            this.beforePrint();
-          } else {
-            this.afterPrint();
-          }
-        });
-      }
       this.windowRef.onafterprint = this.closePortal;
     },
     closePortal() {
