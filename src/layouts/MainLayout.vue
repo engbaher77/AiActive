@@ -30,13 +30,14 @@
           header
           class="text-grey-8"
         >
-          Essential Links
+          Menu
         </q-item-label>
         <EssentialLink
           v-for="link in essentialLinks"
           :key="link.title"
           v-bind="link"
         />
+        
       </q-list>
     </q-drawer>
 
@@ -51,10 +52,16 @@ import EssentialLink from 'components/EssentialLink.vue'
 
 const linksData = [
   {
+    title: 'Dashboard',
+    caption: 'Printing',
+    icon: 'print',
+    link: '/'
+  },
+  {
     title: 'Reporting',
     caption: 'Printing',
     icon: 'print',
-    link: '/#/Reporting'
+    link: '/Report'
   },
  
 ];

@@ -5,12 +5,9 @@ const routes = [
     children: [{ path: "", component: () => import("pages/Index.vue") }]
   },
   {
-    path: "/Reporting",
-    component: () => import("../components/Reporting/ReportingItem.vue")
-  },
-  {
-    path: "/WindowPortal",
-    component: () => import("../components/Reporting/WindowPortal.vue")
+    path: "/Report",
+    component: () => import("layouts/MainLayout.vue"),
+    children: [{ path: "", component: () => import("pages/PageReportingModule.vue") }]
   },
 
   // Always leave this as last one,

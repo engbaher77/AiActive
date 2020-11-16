@@ -65,8 +65,8 @@ export default {
       
     },
     printt(){
-      this.windowRef.print();
       this.windowRef.onafterprint = this.closePortal;
+      this.windowRef.print();
     },
     closePortal() {
       if (this.windowRef) {
